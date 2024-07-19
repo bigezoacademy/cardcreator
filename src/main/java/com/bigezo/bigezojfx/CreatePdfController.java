@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -34,6 +35,7 @@ public class CreatePdfController {
 
     @FXML
     private TextArea logArea;
+
     @FXML
     private MenuItem onepage;
 
@@ -42,8 +44,8 @@ public class CreatePdfController {
 
     @FXML
     private MenuItem close;
-    private Stage stage;
 
+    private Stage stage;
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -53,25 +55,27 @@ public class CreatePdfController {
     private void initialize() {
         // You can initialize components here if needed
     }
+
     @FXML
     void close(ActionEvent event) {
-
+        stage.close();
     }
 
     @FXML
     void createonepage(ActionEvent event) {
-
+        // Implement logic for one-page PDF creation
     }
 
     @FXML
     void createtwopages(ActionEvent event) {
-
+        // Implement logic for two-page PDF creation
     }
 
     @FXML
     void getPremium(ActionEvent event) {
-
+        // Implement logic for premium feature
     }
+
     @FXML
     private void generateCards() {
         String bgPicUrl = bgPicUrlField.getText();
@@ -89,11 +93,8 @@ public class CreatePdfController {
             Font chosenFont = chooseFont.myFont("helvetica");
 
             // Define the directory and create it if it doesn't exist
-            Path directoryPath = Paths.get("C:\\Users\\dell\\Documents\\CARD");
-            File directory = directoryPath.toFile();
-            if (!directory.exists()) {
-                directory.mkdirs();
-            }
+            Path directoryPath = Paths.get(System.getProperty("user.home"), "Documents", "CARD");
+            Files.createDirectories(directoryPath); // Creates directories if they do not exist
 
             for (String personName : names) {
                 // Generate the card PDF
