@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefHeight="444.0" prefWidth="552.0" spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bigezo.bigezojfx.CreatePdfController">
+  <padding>
+    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+  </padding>
+   <VBox>
+      <children>
+         <HBox prefHeight="67.0" prefWidth="535.0">
+            <children>
+               <MenuBar prefHeight="26.0" prefWidth="572.0">
+                 <menus>
+                   <Menu mnemonicParsing="false" text="File">
+                     <items>
+                       <MenuItem fx:id="onepage" mnemonicParsing="false" onAction="#createonepage" text="One Page Card" />
+                           <MenuItem fx:id="twopage" mnemonicParsing="false" onAction="#createtwopages" text="Two Page Card" />
+                           <MenuItem fx:id="close" mnemonicParsing="false" onAction="#close" text="Close" />
+                     </items>
+                   </Menu>
+                   <Menu mnemonicParsing="false" />
+                 </menus>
+                  <padding>
+                     <Insets right="10.0" />
+                  </padding>
+                  <HBox.margin>
+                     <Insets />
+                  </HBox.margin>
+               </MenuBar>
+            </children>
+         </HBox>
+         <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="67.0" prefWidth="535.0">
+            <children>
+               <Label alignment="CENTER" contentDisplay="CENTER" text="CREATE TWO PAGE CARDS">
+                  <font>
+                     <Font name="Times New Roman Bold" size="24.0" />
+                  </font>
+               </Label>
+               <Button mnemonicParsing="false" onAction="#getPremium" styleClass="premium-button" stylesheets="@style.css" text="Get Premium">
+                  <HBox.margin>
+                     <Insets left="30.0" />
+                  </HBox.margin>
+               </Button>
+            </children>
+         </HBox>
+      </children>
+   </VBox>
+   <BorderPane prefHeight="322.0" prefWidth="512.0">
+      <center>
+         <GridPane prefHeight="282.0" prefWidth="512.0" BorderPane.alignment="CENTER">
+           <columnConstraints>
+             <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.4000244140625" minWidth="10.0" prefWidth="162.40001220703124" />
+             <ColumnConstraints hgrow="SOMETIMES" maxWidth="465.5999755859375" minWidth="10.0" prefWidth="350.39998779296883" />
+           </columnConstraints>
+           <rowConstraints>
+             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               <RowConstraints maxHeight="59.600012207031256" minHeight="10.0" prefHeight="30.00000610351563" vgrow="SOMETIMES" />
+               <RowConstraints maxHeight="98.79999389648438" minHeight="10.0" prefHeight="33.599993896484364" vgrow="SOMETIMES" />
+             <RowConstraints maxHeight="121.0000061035156" minHeight="10.0" prefHeight="121.0000061035156" vgrow="SOMETIMES" />
+           </rowConstraints>
+            <children>
+               <TextField fx:id="bgPicUrlField" prefHeight="42.0" prefWidth="256.0" promptText="Page 1 Image path" GridPane.columnIndex="1">
+                  <GridPane.margin>
+                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                  </GridPane.margin>
+               </TextField>
+               <TextField fx:id="bgPicUrlField2" layoutX="172.0" layoutY="23.0" prefHeight="42.0" prefWidth="256.0" promptText="Page 2 Image path" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <GridPane.margin>
+                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                  </GridPane.margin>
+               </TextField>
+               <TextField fx:id="csvFilePathField" layoutX="172.0" layoutY="90.0" prefHeight="42.0" prefWidth="256.0" promptText="CSV File Path" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <GridPane.margin>
+                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                  </GridPane.margin>
+               </TextField>
+               <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="48.0" prefWidth="168.0" text="PAGE 1 IMAGE PATH" textAlignment="RIGHT">
+                  <padding>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  </padding>
+               </Label>
+               <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="10.0" layoutY="22.0" prefHeight="48.0" prefWidth="168.0" text="PAGE 2 IMAGE PATH" textAlignment="RIGHT" GridPane.rowIndex="1">
+                  <padding>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  </padding>
+               </Label>
+               <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="10.0" layoutY="94.0" prefHeight="48.0" prefWidth="168.0" text="NAMES CSV FILE PATH" textAlignment="RIGHT" GridPane.rowIndex="2">
+                  <padding>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  </padding>
+               </Label>
+              <Button onAction="#generateCards" prefHeight="30.0" prefWidth="191.0" styleClass="create-button" stylesheets="@style.css" text="Generate Cards" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <font>
+                     <Font size="18.0" />
+                  </font>
+                  <GridPane.margin>
+                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                  </GridPane.margin>
+               </Button>
+               <TextArea fx:id="logArea" prefHeight="108.0" prefWidth="333.0" promptText="Success/ Error Message shown here" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <font>
+                     <Font size="14.0" />
+                  </font>
+                  <padding>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  </padding>
+                  <GridPane.margin>
+                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                  </GridPane.margin></TextArea>
+            </children>
+         </GridPane>
+      </center>
+   </BorderPane>
+   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="620.0" text="Created by Alfred Ochola +256 773913902   bigezocrm@gmail.com" />
+</VBox>

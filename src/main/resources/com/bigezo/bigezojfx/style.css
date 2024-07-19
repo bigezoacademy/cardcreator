@@ -1,0 +1,10 @@
+.create-button {
+    -fx-background-color: #666666; /* Sky-blue background */
+    -fx-text-fill: white; /* White text color */
+    -fx-font-size: 14px; /* Font size (adjust as needed) */
+    -fx-padding: 5px 10px; /* Padding (adjust as needed) */
+}
+.premium-button{
+ -fx-background-color:#cc2900;
+ -fx-text-fill: white;
+}
