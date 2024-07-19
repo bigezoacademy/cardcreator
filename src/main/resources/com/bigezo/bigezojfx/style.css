@@ -14,3 +14,25 @@
  -fx-background-color:#cc2900;
  -fx-text-fill: white;
 }
+.text-field {
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+      -fx-background-color: #ffffff;
+        -fx-background-radius: 0;
+        -fx-border-width: 0 0 1px 0;
+        -fx-border-color: #000000;
+        -fx-text-fill:#006bb3;
+        -fx-effect: null;
+}
+.text-area {
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+    -fx-background-color: transparent;
+      -fx-background-color: #eeffe6;
+        -fx-background-radius: 0;
+        -fx-border-width: 0px;
+        -fx-effect: null;
+        -fx-text-fill:#004d80;
+}

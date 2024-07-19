@@ -7,13 +7,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
+import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -23,13 +22,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CreatePdfController {
+public class CreateOnePdfController {
+
 
     @FXML
     private TextField bgPicUrlField;
-
-    @FXML
-    private TextField bgPicUrlField2;
 
     @FXML
     private TextField csvFilePathField;
@@ -51,62 +48,46 @@ public class CreatePdfController {
 
     private Stage stage;
 
-    private Scene scene;
-    private Parent root;
-
     public void setStage(Stage stage) {
         this.stage = stage;
     }
+    // You can initialize components here if needed
+    CreatePdfController c=new CreatePdfController();
 
     @FXML
     private void initialize() {
-        // You can initialize components here if needed
+
+
     }
 
 
     @FXML
     void close(ActionEvent event) {
-        stage.close();
+        if (stage != null) {
+            stage.close();
+        } else {
+            System.out.println("Stage is not initialized.");
+        }
     }
 
     @FXML
     void createonepage(ActionEvent event) throws IOException {
-        loadScene(event, "createonepdf.fxml");
+
+        c.loadScene(event, "createonepdf.fxml");
     }
 
     @FXML
     void createtwopages(ActionEvent event) throws IOException {
-        loadScene(event, "createtwopdf.fxml");
+        c.loadScene(event, "createtwopdf.fxml");
     }
     @FXML
     void getPremium(ActionEvent event) {
         // Implement logic for premium feature
     }
-    public void loadScene(ActionEvent event, String fxmlFile) throws IOException {
-        // Load the new FXML file
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-        Parent root = loader.load();
-
-        // Get the current stage from the event source
-        Stage stage;
-        if (event.getSource() instanceof Node) {
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        } else {
-            // Handle the case where the event source is not a Node
-            stage = (Stage) this.stage.getScene().getWindow();
-        }
-
-        // Set the new scene
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setResizable(true);
-        stage.show();
-    }
 
     @FXML
     private void generateCards() {
         String bgPicUrl = bgPicUrlField.getText();
-        String bgPicUrlPage2 = bgPicUrlField2.getText();
         String csvFilePath = csvFilePathField.getText();
 
         CreateCards c = new CreateCards();
@@ -126,7 +107,7 @@ public class CreatePdfController {
             for (String personName : names) {
                 // Generate the card PDF
                 logArea.appendText("Starting to create card for " + personName + "\n");
-                byte[] pdfBytes = c.generateCard(personName, bgPicUrl, bgPicUrlPage2, chosenFont);
+                byte[] pdfBytes = c.generateOneCard(personName, bgPicUrl,  chosenFont);
                 String cardName = personName + "_card.pdf";
                 cardName = cardName.toUpperCase();
                 // Define the file path
