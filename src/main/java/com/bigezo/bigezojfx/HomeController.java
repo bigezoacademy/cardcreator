@@ -52,6 +52,11 @@ public class HomeController {
     }
 
     @FXML
+    void getTemplate(ActionEvent event) throws IOException {
+
+    }
+
+    @FXML
     void createtwopages(ActionEvent event) throws IOException {
         loadScene(event, "createtwopdf.fxml");
     }

@@ -18,7 +18,7 @@ public class BigezoApplication extends Application {
         Parent root = loader.load();
 
         // Get the controller associated with the FXML file
-        CreatePdfController controller = loader.getController();
+        HomeController controller = loader.getController();
         controller.setStage(primaryStage); // Pass the primary stage to the controller
 
         // Set up the scene
