@@ -40,23 +40,18 @@ public class CreatePdfController {
     @FXML
     private TextArea logArea;
 
-    @FXML
-    private MenuItem onepage;
 
-    @FXML
-    private MenuItem twopage;
-
-    @FXML
-    private MenuItem close;
 
     private Stage stage;
 
     private Scene scene;
     private Parent root;
-
+    LoadScene s=new LoadScene();
     public void setStage(Stage stage) {
         this.stage = stage;
+        s.setStage(stage); // Ensure the stage is set in LoadScene
     }
+
 
     @FXML
     private void initialize() {
@@ -64,43 +59,23 @@ public class CreatePdfController {
     }
 
 
-    @FXML
-    void close(ActionEvent event) {
-        stage.close();
-    }
 
     @FXML
     void createonepage(ActionEvent event) throws IOException {
-        loadScene(event, "createonepdf.fxml");
+        s.loadScene(event, "createonepdf.fxml");
     }
 
     @FXML
-    void createtwopages(ActionEvent event) throws IOException {
-        loadScene(event, "createtwopdf.fxml");
+    void home(ActionEvent event) throws IOException {
+        s.loadScene(event, "home.fxml");
+    }
+    @FXML
+    void documentation(ActionEvent event) throws IOException {
+
     }
     @FXML
     void getPremium(ActionEvent event) {
         // Implement logic for premium feature
-    }
-    public void loadScene(ActionEvent event, String fxmlFile) throws IOException {
-        // Load the new FXML file
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-        Parent root = loader.load();
-
-        // Get the current stage from the event source
-        Stage stage;
-        if (event.getSource() instanceof Node) {
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        } else {
-            // Handle the case where the event source is not a Node
-            stage = (Stage) this.stage.getScene().getWindow();
-        }
-
-        // Set the new scene
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setResizable(true);
-        stage.show();
     }
 
     @FXML

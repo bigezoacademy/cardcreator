@@ -46,12 +46,12 @@
       <right>
          <VBox prefHeight="173.0" prefWidth="218.0" BorderPane.alignment="CENTER">
             <children>
-               <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="create-button" stylesheets="@style.css" text="Create One-Page Card">
+               <Button mnemonicParsing="false" onAction="#createonepage" prefHeight="30.0" prefWidth="200.0" styleClass="create-button" stylesheets="@style.css" text="Create One-Page Card">
                   <VBox.margin>
                      <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
                   </VBox.margin>
                </Button>
-               <Button layoutX="10.0" layoutY="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #cc0000;" styleClass="create-button" stylesheets="@style.css" text="Create Two-Page Card">
+               <Button layoutX="10.0" layoutY="30.0" mnemonicParsing="false" onAction="#createtwopages" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #cc0000;" styleClass="create-button" stylesheets="@style.css" text="Create Two-Page Card">
                   <VBox.margin>
                      <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
                   </VBox.margin></Button>

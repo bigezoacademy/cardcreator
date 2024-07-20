@@ -12,19 +12,11 @@ public class BigezoApplication extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        // Load the FXML file
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
-        Parent root = loader.load();
-
-        // Get the controller associated with the FXML file
-        HomeController controller = loader.getController();
-        controller.setStage(primaryStage); // Pass the primary stage to the controller
-
-        // Set up the scene
+    public void start(Stage stage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
         Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Bigezo Card Generator");
-        primaryStage.show();
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
     }
 }

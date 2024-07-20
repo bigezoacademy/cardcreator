@@ -25,6 +25,17 @@
         -fx-text-fill:#006bb3;
         -fx-effect: null;
 }
+.text-field-darkbg {
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+      -fx-background-color: transparent;
+        -fx-background-radius: 0;
+        -fx-border-width: 0 0 1px 0;
+        -fx-border-color: #ffffff;
+        -fx-text-fill:#ffffff;
+        -fx-effect: null;
+}
 .text-area {
     -fx-padding: 0;
     -fx-background-insets: 0;

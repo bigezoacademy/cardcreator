@@ -37,22 +37,16 @@ public class CreateOnePdfController {
     @FXML
     private TextArea logArea;
 
-    @FXML
-    private MenuItem onepage;
 
-    @FXML
-    private MenuItem twopage;
-
-    @FXML
-    private MenuItem close;
 
     private Stage stage;
-
+    LoadScene s=new LoadScene();
     public void setStage(Stage stage) {
         this.stage = stage;
+        s.setStage(stage); // Ensure the stage is set in LoadScene
     }
     // You can initialize components here if needed
-    CreatePdfController c=new CreatePdfController();
+
 
     @FXML
     private void initialize() {
@@ -61,24 +55,20 @@ public class CreateOnePdfController {
     }
 
 
-    @FXML
-    void close(ActionEvent event) {
-        if (stage != null) {
-            stage.close();
-        } else {
-            System.out.println("Stage is not initialized.");
-        }
-    }
-
-    @FXML
-    void createonepage(ActionEvent event) throws IOException {
-
-        c.loadScene(event, "createonepdf.fxml");
-    }
 
     @FXML
     void createtwopages(ActionEvent event) throws IOException {
-        c.loadScene(event, "createtwopdf.fxml");
+        s.loadScene(event, "createpdf.fxml");
+    }
+
+
+    @FXML
+    void home(ActionEvent event) throws IOException {
+        s.loadScene(event, "home.fxml");
+    }
+    @FXML
+    void documentation(ActionEvent event) throws IOException {
+
     }
     @FXML
     void getPremium(ActionEvent event) {
