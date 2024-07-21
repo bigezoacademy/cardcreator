@@ -11,10 +11,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -51,10 +54,7 @@ public class HomeController {
         s.loadScene(event, "createonepdf.fxml");
     }
 
-    @FXML
-    void getTemplate(ActionEvent event) throws IOException {
 
-    }
 
     @FXML
     void createtwopages(ActionEvent event) throws IOException {
@@ -65,5 +65,68 @@ public class HomeController {
         // Implement logic for premium feature
     }
 
+    @FXML
+    void getTemplate(ActionEvent event) {
+        InputStream inputStream = null;
+        FileOutputStream outputStream = null;
+        try {
+            // Load the PDF file from resources
+            inputStream = getClass().getResourceAsStream("/template.pdf");
+            if (inputStream == null) {
+                throw new IOException("PDF file not found in resources");
+            }
+
+            // Use FileChooser to save the file to a chosen location
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Save PDF File");
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
+
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            File saveFile = fileChooser.showSaveDialog(stage);
+
+            if (saveFile != null) {
+                outputStream = new FileOutputStream(saveFile);
+                byte[] buffer = new byte[1024];
+                int bytesRead;
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, bytesRead);
+                }
+
+                // On Android and iOS, trigger an intent or appropriate action to open the file
+                openFile(saveFile);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (inputStream != null) {
+                    inputStream.close();
+                }
+                if (outputStream != null) {
+                    outputStream.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void openFile(File file) {
+        // Platform-specific code to open the file
+        String osName = System.getProperty("os.name").toLowerCase();
+        try {
+            if (osName.contains("win")) {
+                new ProcessBuilder("cmd", "/c", file.getAbsolutePath()).start();
+            } else if (osName.contains("mac")) {
+                new ProcessBuilder("open", file.getAbsolutePath()).start();
+            } else if (osName.contains("nux")) {
+                new ProcessBuilder("xdg-open", file.getAbsolutePath()).start();
+            } else {
+                System.out.println("Unsupported platform");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
