@@ -9,6 +9,7 @@ module com.bigezo.bigezojfx {
     requires org.kordamp.bootstrapfx.core;
     requires com.almasb.fxgl.all;
     requires itextpdf;
+    requires java.desktop;
 
     opens com.bigezo.bigezojfx to javafx.fxml;
     exports com.bigezo.bigezojfx;

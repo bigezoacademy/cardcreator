@@ -25,7 +25,9 @@ public class LoadScene {
 
         // Get the current stage from the event source
         Stage stage;
+
         if (event.getSource() instanceof Node) {
+
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         } else {
             // Handle the case where the event source is not a Node
@@ -40,6 +42,7 @@ public class LoadScene {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setResizable(true);
+        stage.setTitle("Bigezo Card Generator - Version 1.0");
         stage.show();
     }
 }

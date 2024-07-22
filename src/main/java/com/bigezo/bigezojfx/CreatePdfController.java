@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -69,14 +70,19 @@ public class CreatePdfController {
     void home(ActionEvent event) throws IOException {
         s.loadScene(event, "home.fxml");
     }
+    LoadBrowser loadBrowser=new LoadBrowser();
     @FXML
     void documentation(ActionEvent event) throws IOException {
-
+        loadBrowser.loadBrowser("https://bigezo.app.netlify/card/documentation");
     }
     @FXML
     void getPremium(ActionEvent event) {
-        // Implement logic for premium feature
+
+        loadBrowser.loadBrowser("https://bigezo.app.netlify/card/premium");
+        //loadBrowser.showErrorDialog("String message");
     }
+
+
 
     @FXML
     private void generateCards() {
@@ -129,4 +135,115 @@ public class CreatePdfController {
                 .map(String::trim)
                 .collect(Collectors.toList());
     }
+
+    @FXML
+    void getTemplate(ActionEvent event) {
+        InputStream inputStream = null;
+        FileOutputStream outputStream = null;
+        try {
+            // Load the PDF file from resources
+            inputStream = getClass().getResourceAsStream("/2PageTemplate.pdf");
+            if (inputStream == null) {
+                throw new IOException("PDF file not found in resources");
+            }
+
+            // Use FileChooser to save the file to a chosen location
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Save PDF File");
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
+            fileChooser.setInitialFileName("2PageTemplate.pdf");
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            File saveFile = fileChooser.showSaveDialog(stage);
+
+            if (saveFile != null) {
+                outputStream = new FileOutputStream(saveFile);
+                byte[] buffer = new byte[1024];
+                int bytesRead;
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, bytesRead);
+                }
+
+                // On Android and iOS, trigger an intent or appropriate action to open the file
+                openFile(saveFile);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (inputStream != null) {
+                    inputStream.close();
+                }
+                if (outputStream != null) {
+                    outputStream.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @FXML
+    void getTemplateCsv(ActionEvent event) {
+        InputStream inputStream = null;
+        FileOutputStream outputStream = null;
+        try {
+            // Load the PDF file from resources
+            inputStream = getClass().getResourceAsStream("/SampleListOfNames.csv");
+            if (inputStream == null) {
+                throw new IOException("CSV file not found in resources");
+            }
+
+            // Use FileChooser to save the file to a chosen location
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Save CSV File");
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
+            fileChooser.setInitialFileName("SampleListOfNames.csv");
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            File saveFile = fileChooser.showSaveDialog(stage);
+
+            if (saveFile != null) {
+                outputStream = new FileOutputStream(saveFile);
+                byte[] buffer = new byte[1024];
+                int bytesRead;
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, bytesRead);
+                }
+
+                // On Android and iOS, trigger an intent or appropriate action to open the file
+                openFile(saveFile);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (inputStream != null) {
+                    inputStream.close();
+                }
+                if (outputStream != null) {
+                    outputStream.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void openFile(File file) {
+        // Platform-specific code to open the file
+        String osName = System.getProperty("os.name").toLowerCase();
+        try {
+            if (osName.contains("win")) {
+                new ProcessBuilder("cmd", "/c", file.getAbsolutePath()).start();
+            } else if (osName.contains("mac")) {
+                new ProcessBuilder("open", file.getAbsolutePath()).start();
+            } else if (osName.contains("nux")) {
+                new ProcessBuilder("xdg-open", file.getAbsolutePath()).start();
+            } else {
+                System.out.println("Unsupported platform");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
